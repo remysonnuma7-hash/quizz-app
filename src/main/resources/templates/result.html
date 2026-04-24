@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<body th:replace="~{layout :: layout(~{::section}, 'Résultat')}">
+
+<section>
+    <div class="card border-0 shadow-lg">
+        <div class="card-body p-4 p-md-5 text-center">
+            <div class="result-badge mb-3">🏁 Résultat</div>
+
+            <h2 class="display-6 fw-bold mb-2" th:text="${message}">Très bien</h2>
+            <p class="lead text-muted mb-4">
+                Matière: <strong th:text="${quizSession.subject.label()}">Mixte</strong>
+            </p>
+
+            <div class="score-pill mx-auto mb-4">
+                <span class="fw-bold" th:text="${quizSession.score}">0</span>
+                <span class="text-muted"> / </span>
+                <span th:text="${quizSession.total()}">5</span>
+            </div>
+
+            <div class="d-flex justify-content-center gap-2 flex-wrap">
+                <a class="btn btn-primary btn-lg px-4" th:href="@{/}">Rejouer</a>
+                <a class="btn btn-outline-secondary btn-lg px-4" th:href="@{/quiz(reset=1)}">Nouveau quiz</a>
+            </div>
+
+            
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
