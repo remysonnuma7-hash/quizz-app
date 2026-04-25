@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section}, 'Accueil - Nova Quiz')}">
+<section class="hero card border-0">
+    <div class="card-body p-4 p-md-5">
+        <div class="row align-items-center g-4">
+            <div class="col-md-7">
+                <div class="app-kicker mb-3">✨ Quiz intelligent et rapide</div>
+                <h1 class="display-5 fw-bold mb-3">
+                    Révise avec <span class="text-gradient">Nova Quiz</span>
+                </h1>
+                <p class="lead mb-4 text-muted">
+                    Choisis une matière, réponds aux questions et découvre ton score à la fin du parcours.
+                </p>
+
+                <form class="row g-3" th:action="@{/start}" method="post">
+                    <div class="col-12 col-md-7">
+                        <label class="form-label fw-semibold">Matière à travailler</label>
+                        <select class="form-select form-select-lg" name="subject" required>
+                            <option value="ENGLISH">Anglais</option>
+                            <option value="MATH">Maths</option>
+                            <option value="CHEMISTRY">Chimie</option>
+                            <option value="MIXED">Mixte (les 3)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-5">
+                        <label class="form-label fw-semibold">Nombre de questions</label>
+                        <input class="form-control form-control-lg" type="number" min="1" max="10" name="count" value="5">
+                    </div>
+
+                    <div class="col-12 pt-2">
+                        <button class="btn btn-primary btn-lg px-4">
+                            Commencer maintenant
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-5">
+                <div class="feature-grid">
+                    <div class="feature">
+                        <div class="feature-icon">🧠</div>
+                        <div>
+                            <div class="fw-semibold">Questions renouvelées</div>
+                            <div class="text-muted small">Une banque de questions plus moderne</div>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📊</div>
+                        <div>
+                            <div class="fw-semibold">Résultat immédiat</div>
+                            <div class="text-muted small">Ton score apparaît dès la fin</div>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <div>
+                            <div class="fw-semibold">Parcours aléatoire</div>
+                            <div class="text-muted small">Les questions sont mélangées automatiquement</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-3 rounded-4 bg-white border text-muted small">
+                    Sélectionne une matière, choisis la quantité, puis lance ton entraînement.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<body th:replace="~{layout :: layout(~{::section}, 'Quiz')}">
+
+<section>
+    <div class="quiz-topbar d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
+        <div>
+            <div class="app-kicker mb-2">Mode entraînement</div>
+            <h2 class="h4 fw-bold mb-1">
+                Quiz - <span th:text="${quizSession.subject.label()}">Matière</span>
+            </h2>
+            <div class="text-muted small">
+                Question <span th:text="${quizSession.index + 1}">1</span> /
+                <span th:text="${quizSession.total()}">5</span>
+                • Score: <span th:text="${quizSession.score}">0</span>
+            </div>
+        </div>
+        <a class="btn btn-outline-secondary" th:href="@{/quiz(reset=1)}">Recommencer</a>
+    </div>
+
+    <div class="card border-0 quiz-card">
+        <div class="card-body p-4 p-md-5">
+            <div class="subject-badge mb-3" th:text="${question.subject.label()}">Matière</div>
+            <h3 class="h4 fw-bold mb-4" th:text="${question.statement}">Question</h3>
+
+            <form th:action="@{/quiz}" th:object="${answerForm}" method="post">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="choice" th:each="c,iter : ${question.choices}">
+                            <label class="w-100 p-3 rounded-4 choice-label">
+                                <input class="form-check-input me-2"
+                                       type="radio"
+                                       th:field="*{answer}"
+                                       th:value="${#strings.arraySplit('A,B,C,D', ',')[iter.index]}">
+
+                                <span class="choice-letter"
+                                      th:text="${#strings.arraySplit('A,B,C,D', ',')[iter.index]}">
+                                    A
+                                </span>
+
+                                <span th:text="${c}">Choix</span>
+                            </label>
+                        </div>
+
+                        <div class="text-danger small mt-2"
+                             th:if="${#fields.hasErrors('answer')}"
+                             th:errors="*{answer}">
+                            Erreur
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex gap-2 flex-wrap pt-2">
+                        <button class="btn btn-primary btn-lg px-4" type="submit">Valider ma réponse</button>
+                        <a class="btn btn-light btn-lg px-4" th:href="@{/}">Accueil</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
